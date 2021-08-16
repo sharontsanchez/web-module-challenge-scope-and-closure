@@ -62,10 +62,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+return Math.floor(Math.random() * Math.floor(3));
 }
-
+console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -80,20 +80,28 @@ Use the finalScore function below to do the following:
   "Away": 5
 }
 */ 
-
-function finalScore(/*code Here*/){
-  /*Code Here*/
+// params inningcb, number (1-9)
+function finalScore(inningcb,number){
+return {
+  Home: inningcb(),
+  Away: inningcb()
+  }
 }
-
+console.log(finalScore(inning,3));
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+  // recieve inningcb
+  // return an object with a score for home and away
+function getInningScore(inningcb) {
+  return {
+    Home: inningcb(),
+    Away: inningcb()
+  }
 }
-
+console.log(getInningScore(inning));
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -136,6 +144,7 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
+// get inningscorecb, scorecb, number
 function scoreboard(/* CODE HERE */) {
   /* CODE HERE */
 }
