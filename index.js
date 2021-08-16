@@ -28,11 +28,12 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+  counter 1 has its variable within a function while counter2 has its variable in the global scope
   2. Which of the two uses a closure? How can you tell?
-  
+  counter1 uses a closure, because there is an inner function that reaches into an outer function to grab a a value that is defined in the outer function.
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+     counter1 is preferable most of the time and the only time counter2 is better is when we need to access the count variable globally in the program itself.
 */
 
 // counter1 code
@@ -82,12 +83,18 @@ Use the finalScore function below to do the following:
 */ 
 // params inningcb, number (1-9)
 function finalScore(inningcb,number){
+  let homeScore = 0;
+  let awayScore = 0;
+for (let i = 0; i < number; i++){
+  homeScore = homeScore + inningcb();
+  awayScore = awayScore + inningcb();
+}
 return {
-  Home: inningcb(),
-  Away: inningcb()
+  Home: homeScore,
+  Away: awayScore 
   }
 }
-console.log(finalScore(inning,3));
+console.log(finalScore(inning, 9));
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
@@ -145,12 +152,26 @@ Use the scoreboard function below to do the following:
   */
 
 // get inningscorecb, scorecb, number
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScorecb,inningcb,number) {
+  const score = [];
+  let homeScore = 0;
+  let awayScore = 0;
+  for (let i = 0; i < 9; i++){
+    const currentScore = getInningScorecb(inningcb);
+    homeScore = homeScore + currentScore.Home;
+    awayScore = awayScore + currentScore.Away;
+    score.push(`Inning ${i+1}: Away ${currentScore.Away} - Home: ${currentScore.Home} `);
+  }
+
+if (homeScore === awayScore){
+  score.push(`This game will requre extra innings: Away: ${awayScore} - Home: ${homeScore}`);
 }
-
-
-
+else{
+  score.push(`Final Score: Away: ${awayScore} - Home: ${homeScore}`);
+}
+return score;
+}
+console.log(scoreboard(getInningScore,inning,9));
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo(){
